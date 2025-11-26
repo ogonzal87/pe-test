@@ -1,7 +1,7 @@
-import AIDashboard from './AIDashboard'
+import NexusAI from './NexusAI'
 
 function App() {
-  return <AIDashboard />
+  return <NexusAI />
 }
 
 export default App

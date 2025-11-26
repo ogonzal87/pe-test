@@ -18,7 +18,9 @@ import {
   MessageSquare,
   FileImage,
   Brain,
-  Code
+  Code,
+  ArrowUpRight,
+  Sparkles
 } from 'lucide-react';
 
 // Dummy Data
@@ -30,7 +32,7 @@ const projects = [
     owner: {
       name: 'Sarah Chen',
       avatar: 'SC',
-      color: 'bg-emerald-500'
+      gradient: 'from-emerald-400 to-teal-500'
     },
     status: 'on-track',
     techStack: ['OpenAI GPT-4', 'LangChain', 'PostgreSQL'],
@@ -49,7 +51,7 @@ const projects = [
     owner: {
       name: 'Michael Rodriguez',
       avatar: 'MR',
-      color: 'bg-blue-500'
+      gradient: 'from-blue-400 to-indigo-500'
     },
     status: 'on-track',
     techStack: ['Anthropic Claude', 'Pinecone', 'FastAPI'],
@@ -68,7 +70,7 @@ const projects = [
     owner: {
       name: 'Emily Park',
       avatar: 'EP',
-      color: 'bg-purple-500'
+      gradient: 'from-purple-400 to-pink-500'
     },
     status: 'at-risk',
     techStack: ['OpenAI GPT-4', 'Midjourney API', 'Airtable'],
@@ -87,7 +89,7 @@ const projects = [
     owner: {
       name: 'David Kim',
       avatar: 'DK',
-      color: 'bg-amber-500'
+      gradient: 'from-amber-400 to-orange-500'
     },
     status: 'on-track',
     techStack: ['OpenAI GPT-4', 'LangChain', 'ChromaDB'],
@@ -106,7 +108,7 @@ const projects = [
     owner: {
       name: 'Jessica Wu',
       avatar: 'JW',
-      color: 'bg-pink-500'
+      gradient: 'from-pink-400 to-rose-500'
     },
     status: 'blocked',
     techStack: ['OpenAI GPT-4', 'Clearbit API', 'Salesforce'],
@@ -125,7 +127,7 @@ const projects = [
     owner: {
       name: 'Alex Johnson',
       avatar: 'AJ',
-      color: 'bg-indigo-500'
+      gradient: 'from-indigo-400 to-purple-500'
     },
     status: 'on-track',
     techStack: ['GitHub Copilot', 'SonarQube', 'Jenkins'],
@@ -151,28 +153,31 @@ const AIDashboard = () => {
   const getStatusBadge = (status) => {
     const badges = {
       'on-track': {
-        bg: 'bg-emerald-100',
-        text: 'text-emerald-800',
+        bg: 'bg-gradient-to-r from-emerald-500 to-teal-500',
+        text: 'text-white',
         label: 'On Track',
-        icon: CheckCircle2
+        icon: CheckCircle2,
+        glow: 'shadow-emerald-500/20'
       },
       'at-risk': {
-        bg: 'bg-amber-100',
-        text: 'text-amber-800',
+        bg: 'bg-gradient-to-r from-amber-500 to-orange-500',
+        text: 'text-white',
         label: 'At Risk',
-        icon: AlertCircle
+        icon: AlertCircle,
+        glow: 'shadow-amber-500/20'
       },
       'blocked': {
-        bg: 'bg-rose-100',
-        text: 'text-rose-800',
+        bg: 'bg-gradient-to-r from-rose-500 to-pink-500',
+        text: 'text-white',
         label: 'Blocked',
-        icon: XCircle
+        icon: XCircle,
+        glow: 'shadow-rose-500/20'
       }
     };
     const badge = badges[status];
     const Icon = badge.icon;
     return (
-      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium ${badge.bg} ${badge.text}`}>
+      <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${badge.bg} ${badge.text} shadow-lg ${badge.glow}`}>
         <Icon className="w-3.5 h-3.5" />
         {badge.label}
       </span>
@@ -217,20 +222,28 @@ const AIDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200">
+      <header className="bg-white/80 backdrop-blur-xl border-b border-slate-200/50 sticky top-0 z-40 shadow-sm">
         <div className="max-w-[1600px] mx-auto px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-slate-900">AI Program Operating System</h1>
-              <p className="text-sm text-slate-500 mt-1">Portfolio-wide AI initiative tracking and ROI analytics</p>
+              <div className="flex items-center gap-3 mb-1">
+                <div className="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/30">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-900 bg-clip-text text-transparent">
+                  AI Program OS
+                </h1>
+              </div>
+              <p className="text-sm text-slate-600 ml-14">Portfolio-wide AI initiative tracking and ROI analytics</p>
             </div>
             <div className="flex items-center gap-3">
-              <button className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
+              <button className="px-5 py-2.5 text-sm font-semibold text-slate-700 bg-white border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:shadow-md transition-all duration-200">
                 Export Report
               </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors">
+              <button className="px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-500/30 transition-all duration-200 flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
                 New Project
               </button>
             </div>
@@ -238,115 +251,154 @@ const AIDashboard = () => {
         </div>
       </header>
 
-      <div className="max-w-[1600px] mx-auto px-8 py-8">
+      <div className="max-w-[1600px] mx-auto px-8 py-10">
         {/* North Star Metrics */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-4 gap-6 mb-10">
           {/* Total Active Projects */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6">
-            <div className="flex items-center justify-between mb-3">
-              <div className="p-2 bg-slate-100 rounded-lg">
-                <Briefcase className="w-5 h-5 text-slate-600" />
+          <div className="group relative bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-lg shadow-indigo-500/30">
+                  <Briefcase className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">
+                {totalProjects}
+              </div>
+              <div className="text-sm font-medium text-slate-600">Total Active Projects</div>
             </div>
-            <div className="text-3xl font-semibold text-slate-900">{totalProjects}</div>
-            <div className="text-sm text-slate-500 mt-1">Total Active Projects</div>
           </div>
 
           {/* Total Invested */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6">
-            <div className="flex items-center justify-between mb-3">
-              <div className="p-2 bg-slate-100 rounded-lg">
-                <DollarSign className="w-5 h-5 text-slate-600" />
+          <div className="group relative bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl shadow-lg shadow-blue-500/30">
+                  <DollarSign className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-1">
+                {formatCompactCurrency(totalInvested)}
+              </div>
+              <div className="text-sm font-medium text-slate-600">Total Invested</div>
             </div>
-            <div className="text-3xl font-semibold text-slate-900">{formatCompactCurrency(totalInvested)}</div>
-            <div className="text-sm text-slate-500 mt-1">Total Invested</div>
           </div>
 
           {/* Annualized Savings */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6">
-            <div className="flex items-center justify-between mb-3">
-              <div className="p-2 bg-emerald-100 rounded-lg">
-                <TrendingUp className="w-5 h-5 text-emerald-600" />
+          <div className="group relative bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl shadow-emerald-500/30 p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                  <TrendingUp className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex items-center gap-1 text-white/90 text-sm font-semibold">
+                  <ArrowUpRight className="w-4 h-4" />
+                  ROI+
+                </div>
               </div>
+              <div className="text-4xl font-bold text-white mb-1">
+                {formatCompactCurrency(totalSavings)}
+              </div>
+              <div className="text-sm font-medium text-emerald-100">Annualized Savings</div>
             </div>
-            <div className="text-3xl font-bold text-emerald-600">{formatCompactCurrency(totalSavings)}</div>
-            <div className="text-sm text-slate-500 mt-1">Annualized Savings</div>
           </div>
 
           {/* Avg ROI Multiplier */}
-          <div className="bg-white rounded-lg border border-slate-200 p-6">
-            <div className="flex items-center justify-between mb-3">
-              <div className="p-2 bg-slate-100 rounded-lg">
-                <Zap className="w-5 h-5 text-slate-600" />
+          <div className="group relative bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-6 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-100 to-orange-100 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition-opacity" />
+            <div className="relative">
+              <div className="flex items-center justify-between mb-4">
+                <div className="p-3 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl shadow-lg shadow-amber-500/30">
+                  <Zap className="w-6 h-6 text-white" />
+                </div>
               </div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent mb-1">
+                {avgROI}x
+              </div>
+              <div className="text-sm font-medium text-slate-600">Avg. ROI Multiplier</div>
             </div>
-            <div className="text-3xl font-semibold text-slate-900">{avgROI}x</div>
-            <div className="text-sm text-slate-500 mt-1">Avg. ROI Multiplier</div>
           </div>
         </div>
 
         {/* Master List */}
-        <div className="bg-white rounded-lg border border-slate-200">
-          <div className="px-6 py-4 border-b border-slate-200">
-            <h2 className="text-lg font-semibold text-slate-900">Active AI Projects</h2>
+        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+          <div className="px-8 py-6 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-bold text-slate-900">Active AI Projects</h2>
+                <p className="text-sm text-slate-600 mt-1">{projects.length} projects delivering value across portfolio</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <button className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white rounded-lg transition-all">
+                  Filter
+                </button>
+                <button className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-white rounded-lg transition-all">
+                  Sort
+                </button>
+              </div>
+            </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                <tr className="bg-slate-50/50">
+                  <th className="px-8 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">
                     Project Name
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">
                     Business Unit
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">
                     Owner
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold text-slate-600 uppercase tracking-wider">
                     Tech Stack
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-semibold text-slate-600 uppercase tracking-wider">
+                  <th className="px-8 py-4 text-right text-xs font-bold text-slate-600 uppercase tracking-wider">
                     Net Value
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-slate-100">
                 {projects.map((project) => (
                   <tr
                     key={project.id}
                     onClick={() => setSelectedProject(project)}
-                    className="hover:bg-slate-50 cursor-pointer transition-colors"
+                    className="group hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/50 cursor-pointer transition-all duration-200"
                   >
-                    <td className="px-6 py-4">
-                      <div className="font-medium text-slate-900">{project.name}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-slate-600">{project.businessUnit}</div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-8 h-8 rounded-full ${project.owner.color} flex items-center justify-center text-white text-xs font-medium`}>
-                          {project.owner.avatar}
-                        </div>
-                        <span className="text-sm text-slate-700">{project.owner.name}</span>
+                    <td className="px-8 py-5">
+                      <div className="font-semibold text-slate-900 group-hover:text-indigo-700 transition-colors">
+                        {project.name}
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-6 py-5">
+                      <div className="text-sm text-slate-600 font-medium">{project.businessUnit}</div>
+                    </td>
+                    <td className="px-6 py-5">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${project.owner.gradient} flex items-center justify-center text-white text-xs font-bold shadow-lg`}>
+                          {project.owner.avatar}
+                        </div>
+                        <span className="text-sm font-medium text-slate-700">{project.owner.name}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-5">
                       {getStatusBadge(project.status)}
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-1.5">
+                    <td className="px-6 py-5">
+                      <div className="flex items-center gap-2">
                         {project.techIcons.map((iconName, idx) => {
                           const Icon = getTechIcon(iconName);
                           return (
                             <div
                               key={idx}
-                              className="p-1.5 bg-slate-100 rounded border border-slate-200"
+                              className="p-2 bg-gradient-to-br from-slate-100 to-slate-50 rounded-lg border border-slate-200 hover:border-indigo-300 hover:shadow-md transition-all"
                               title={project.techStack[idx]}
                             >
                               <Icon className="w-4 h-4 text-slate-600" />
@@ -355,10 +407,11 @@ const AIDashboard = () => {
                         })}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-right">
-                      <div className={`text-sm font-semibold ${project.netValue >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                    <td className="px-8 py-5 text-right">
+                      <div className={`text-base font-bold ${project.netValue >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                         {formatCurrency(project.netValue)}
                       </div>
+                      <div className="text-xs text-slate-500 mt-0.5">{project.roiMultiplier.toFixed(1)}x ROI</div>
                     </td>
                   </tr>
                 ))}
@@ -370,20 +423,29 @@ const AIDashboard = () => {
 
       {/* Project Report Card Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 bg-gradient-to-br from-slate-900/90 via-indigo-900/90 to-purple-900/90 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-200">
             {/* Modal Header */}
-            <div className="px-8 py-6 border-b border-slate-200 bg-slate-50">
-              <div className="flex items-start justify-between">
+            <div className="relative px-8 py-8 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 border-b border-slate-200 overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-200 to-purple-200 rounded-full blur-3xl opacity-30" />
+              <div className="relative flex items-start justify-between">
                 <div className="flex-1">
-                  <h2 className="text-2xl font-semibold text-slate-900 mb-2">
-                    {selectedProject.name}
-                  </h2>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${selectedProject.owner.gradient} flex items-center justify-center text-white text-lg font-bold shadow-lg`}>
+                      {selectedProject.owner.avatar}
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-slate-900 mb-1">
+                        {selectedProject.name}
+                      </h2>
+                      <p className="text-sm text-slate-600">{selectedProject.businessUnit}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 ml-0.5">
                     {getStatusBadge(selectedProject.status)}
-                    <div className="flex items-center gap-1.5 text-sm text-slate-500">
+                    <div className="flex items-center gap-2 text-sm text-slate-500 font-medium">
                       <Calendar className="w-4 h-4" />
-                      Last updated: {new Date(selectedProject.lastUpdated).toLocaleDateString('en-US', {
+                      Updated {new Date(selectedProject.lastUpdated).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
                         year: 'numeric'
@@ -393,70 +455,74 @@ const AIDashboard = () => {
                 </div>
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="p-2 hover:bg-slate-200 rounded-lg transition-colors"
+                  className="p-3 hover:bg-white/80 rounded-xl transition-all duration-200 group"
                 >
-                  <X className="w-5 h-5 text-slate-500" />
+                  <X className="w-5 h-5 text-slate-400 group-hover:text-slate-600" />
                 </button>
               </div>
             </div>
 
             {/* Modal Content */}
-            <div className="px-8 py-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+            <div className="px-8 py-6 overflow-y-auto max-h-[calc(90vh-300px)]">
               {/* The Job */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <Target className="w-5 h-5 text-slate-600" />
-                  <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">The Job</h3>
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg shadow-lg shadow-indigo-500/20">
+                    <Target className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Mission</h3>
                 </div>
-                <p className="text-slate-700 leading-relaxed">{selectedProject.job}</p>
+                <p className="text-slate-700 leading-relaxed text-base">{selectedProject.job}</p>
               </div>
 
               {/* ROI Meter */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <BarChart3 className="w-5 h-5 text-slate-600" />
-                  <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">ROI Analysis</h3>
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg shadow-lg shadow-emerald-500/20">
+                    <BarChart3 className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">ROI Performance</h3>
                 </div>
-                <div className="bg-slate-50 rounded-lg p-5 border border-slate-200">
-                  <div className="grid grid-cols-3 gap-6 mb-4">
-                    <div>
-                      <div className="text-xs text-slate-500 mb-1">Investment</div>
-                      <div className="text-lg font-semibold text-slate-900">
+                <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl p-6 border border-slate-200 shadow-inner">
+                  <div className="grid grid-cols-3 gap-6 mb-6">
+                    <div className="text-center">
+                      <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-2">Investment</div>
+                      <div className="text-2xl font-bold text-slate-900">
                         {formatCurrency(selectedProject.invested)}
                       </div>
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-500 mb-1">Annualized Savings</div>
-                      <div className="text-lg font-semibold text-emerald-600">
+                    <div className="text-center">
+                      <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-2">Annual Savings</div>
+                      <div className="text-2xl font-bold text-emerald-600">
                         {formatCurrency(selectedProject.savings)}
                       </div>
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-500 mb-1">ROI Multiplier</div>
-                      <div className={`text-lg font-semibold ${selectedProject.roiMultiplier >= 1 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                    <div className="text-center">
+                      <div className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-2">ROI Multiplier</div>
+                      <div className={`text-2xl font-bold ${selectedProject.roiMultiplier >= 1 ? 'text-emerald-600' : 'text-rose-600'}`}>
                         {selectedProject.roiMultiplier.toFixed(1)}x
                       </div>
                     </div>
                   </div>
 
                   {/* Progress Bar */}
-                  <div className="relative">
-                    <div className="flex justify-between text-xs text-slate-600 mb-2">
+                  <div className="relative mb-6">
+                    <div className="flex justify-between text-xs text-slate-600 font-semibold mb-3">
                       <span>Cost</span>
-                      <span>Value</span>
+                      <span>Value Generated</span>
                     </div>
-                    <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
+                    <div className="h-4 bg-slate-200 rounded-full overflow-hidden shadow-inner">
                       <div
-                        className={`h-full ${selectedProject.netValue >= 0 ? 'bg-emerald-500' : 'bg-rose-500'} transition-all duration-500`}
+                        className={`h-full ${selectedProject.netValue >= 0 ? 'bg-gradient-to-r from-emerald-500 to-teal-500' : 'bg-gradient-to-r from-rose-500 to-pink-500'} transition-all duration-500 shadow-lg`}
                         style={{ width: `${Math.min((selectedProject.savings / (selectedProject.invested + selectedProject.savings)) * 100, 100)}%` }}
                       />
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-4 border-t border-slate-200">
+                  <div className="pt-6 border-t border-slate-200">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-slate-600">Net Value</span>
-                      <span className={`text-xl font-bold ${selectedProject.netValue >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                      <span className="text-sm font-semibold text-slate-600">Net Value Created</span>
+                      <span className={`text-3xl font-bold ${selectedProject.netValue >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                         {formatCurrency(selectedProject.netValue)}
                       </span>
                     </div>
@@ -465,19 +531,21 @@ const AIDashboard = () => {
               </div>
 
               {/* Tech Stack */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <Code className="w-5 h-5 text-slate-600" />
-                  <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Tech Stack</h3>
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg shadow-lg shadow-blue-500/20">
+                    <Code className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Technology Stack</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {selectedProject.techStack.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-2 px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-sm text-slate-700"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-br from-slate-50 to-blue-50 border-2 border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:border-indigo-300 hover:shadow-md transition-all"
                     >
                       {React.createElement(getTechIcon(selectedProject.techIcons[idx]), {
-                        className: "w-4 h-4 text-slate-600"
+                        className: "w-4 h-4 text-indigo-600"
                       })}
                       {tech}
                     </span>
@@ -486,30 +554,32 @@ const AIDashboard = () => {
               </div>
 
               {/* Owner */}
-              <div className="mb-6">
-                <div className="flex items-center gap-2 mb-3">
-                  <User className="w-5 h-5 text-slate-600" />
-                  <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide">Project Owner</h3>
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg shadow-lg shadow-purple-500/20">
+                    <User className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Project Lead</h3>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className={`w-12 h-12 rounded-full ${selectedProject.owner.color} flex items-center justify-center text-white text-sm font-medium`}>
+                <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-slate-50 to-purple-50 rounded-2xl border border-slate-200">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${selectedProject.owner.gradient} flex items-center justify-center text-white text-base font-bold shadow-lg`}>
                     {selectedProject.owner.avatar}
                   </div>
                   <div>
-                    <div className="font-medium text-slate-900">{selectedProject.owner.name}</div>
-                    <div className="text-sm text-slate-500">{selectedProject.businessUnit}</div>
+                    <div className="font-bold text-slate-900 text-lg">{selectedProject.owner.name}</div>
+                    <div className="text-sm text-slate-600 font-medium">{selectedProject.businessUnit}</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="px-8 py-5 border-t border-slate-200 bg-slate-50 flex items-center gap-3">
-              <button className="flex-1 px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors flex items-center justify-center gap-2">
+            <div className="px-8 py-6 border-t border-slate-200 bg-gradient-to-r from-slate-50 to-blue-50 flex items-center gap-4">
+              <button className="flex-1 px-6 py-3.5 text-sm font-bold text-slate-700 bg-white border-2 border-slate-200 rounded-xl hover:border-slate-300 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2">
                 <Bell className="w-4 h-4" />
                 Request Update
               </button>
-              <button className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+              <button className="flex-1 px-6 py-3.5 text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl hover:from-indigo-700 hover:to-purple-700 shadow-lg shadow-indigo-500/30 transition-all duration-200 flex items-center justify-center gap-2">
                 <FileText className="w-4 h-4" />
                 View Documentation
               </button>
